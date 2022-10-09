@@ -2,16 +2,27 @@ import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
 
 import logo from "../../assets/DreamWed Logo.svg"
+import { UserAuth } from '../../context/AuthContext';
 
 
-function Header(props) {
+function Header() {
 
-  const onLogin = (e) => {
-    props.loginHandler(e)
+  const { googleSignIn, logOut, user} = UserAuth()
+
+
+  const onLogin = async(e) => {
+    e.preventDefault()
+    try {
+      await googleSignIn();
+
+
+    } catch (error) {
+      console.log(error);
+    }
   }
 
-  const onLogout = (e) => {
-    props.logoutHandler(e)
+  const onLogout = () => {
+    logOut()
   }
   return (
     <Navbar className="row">
@@ -26,13 +37,14 @@ function Header(props) {
         </Navbar.Brand>
 
         <Navbar.Text className='fluid'>
-          {(props.user === null) ?
+          {(user === null) ?
             <a href="/" onClick={onLogin}>Login</a> :
             <div className='d-flex'>
-              <span>{props.user.displayName}</span>
-              <a href="/" onClick={onLogout}>
-                <img src={props.user.photoURL} alt="" width={30} className="ms-2 rounded-circle" />
-              </a>
+              <span>{user.displayName}</span>
+              <span onClick={onLogout}>
+                {/* <img src={user.photoURL} alt="" width={30} className="ms-2 rounded-circle" />  */}
+                Logout
+              </span>
             </div>}
           {/* eslint-disable-next-line  */}
         </Navbar.Text>

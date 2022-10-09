@@ -1,14 +1,20 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { BiPencil } from 'react-icons/bi';
 import { BsTrash } from 'react-icons/bs';
 import { FiPlusCircle } from 'react-icons/fi';
 import classes from './CategoryMain.module.css'
+import OneExpense from './OneExpense';
 
-function CategoryMain(props) {
+function CategoryMain(props) {// eslint-disable-next-line
+    const [filteredExpenses, setfilteredExpenses] = useState();
+    useEffect(() => {
+        const fex = props.expenses.filter(item => item.catergoryID === props.catergory.id)
+        setfilteredExpenses(fex)
+    }, [props]);
     return (
         <div className='d-flex h-100 border border-1 rounded col-8 ml-4 py-2 justify-content-center flex-column'>
             <div className="mt-4 mb-auto mx-auto d-flex flex-column ">
-                <props.catergory.icon className=" mx-auto border border-1 rounded-circle p-2 m-2" size={50} />
+                <props.icon className=" mx-auto border border-1 rounded-circle p-2 m-2" size={50} />
                 <h4 className=" mx-auto">{props.catergory.name} <a href='/'><i><BiPencil color='A663CC' /></i></a></h4>
                 <div style={{ fontSize: "0.9rem" }}>
                     <span className=" mx-2">{`Estimated cost: $${props.catergory.cost}`}</span>
@@ -34,6 +40,7 @@ function CategoryMain(props) {
                     <span className=" my-auto col-1 ms-auto text-end">{`$500`}</span>
                     <span className=" my-auto ms-auto">...</span>
                 </li>
+                <OneExpense classes={classes} expenses={props.expenses}></OneExpense>
                 <li className={`${classes["expenses-item"]} list-group-item 
                     border-0 border-bottom rounded-0 d-flex`}>
                     <span className=" my-auto col-4">Band</span>
@@ -52,7 +59,7 @@ function CategoryMain(props) {
                 </li> 
                 <li className={`${classes["expenses-item"]} ${classes["add"]} list-group-item 
                     border-0 border-bottom rounded-0 d-flex`}>
-                    <span className=" my-auto"><FiPlusCircle/>{` Add new expense`}</span>
+                    <span onClick={()=> {console.log(props.catergory)}} className=" my-auto"><FiPlusCircle/>{` Add new expense`}</span>
                 </li> 
                 <li className={`${classes["expenses-item"]} list-group-item 
                     border-0 border-top rounded-0 d-flex mt-auto`}>

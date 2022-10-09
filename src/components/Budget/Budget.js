@@ -4,6 +4,7 @@ import CategoryMain from './CategoryMain';
 
 import { GiDiamondRing } from 'react-icons/gi';
 import { TbNumber1, TbNumber2, TbHome, TbGift, TbDots } from 'react-icons/tb';
+import {  useParams } from 'react-router-dom';
 const icons = [
     {
         name:'Night 1',
@@ -30,6 +31,7 @@ const icons = [
         icon:GiDiamondRing
     },
 ]
+// eslint-disable-next-line
 const CATEGORIES = [
     {
         icon: TbNumber1,
@@ -69,12 +71,16 @@ function Budget(props) {
         const ic = icons.filter((it)=> it.name===item.name)[0]
         item.icon = ic?ic.icon:TbDots;
        });
-    console.log(props.categories);
+    
+       
+    let catID = useParams().id
+    if (!catID) catID=0
     return (
         <div className="row my-3 flex-fill">
             <div className="d-flex flex-row col-9 mx-auto">
                 <BudgetSidebar categories={props.categories} />
-                <CategoryMain catergory={CATEGORIES[0]} />
+                    {console.log(props.categories[0].uid)}
+                <CategoryMain catergory={props.categories[+(catID)]} icon={icons[+(catID)].icon} expenses={props.expenses} />
             </div>
         </div>
     );

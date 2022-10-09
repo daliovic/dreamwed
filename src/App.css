@@ -43,3 +43,8 @@
   height: 100%;
   background-color: rgba(111, 45, 189, 1);
 }
+
+a.active{
+  color:#A663CC;
+  border-bottom: solid;
+}

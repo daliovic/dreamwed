@@ -5,73 +5,64 @@ import Header from './components/UI/Header';
 import MainNav from './components/UI/MainNav'
 import Footer from './components/UI/Footer';
 import Budget from './components/Budget/Budget';
-import { BrowserRouter as Router } from 'react-router-dom'
+import { Route, Routes } from 'react-router-dom'
 
 
-import { getAuth, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import firebase from 'firebase/compat/app'
-import { useAuthState } from "react-firebase-hooks/auth"
-import 'firebase/compat/firestore'
-import { useCollectionData } from 'react-firebase-hooks/firestore'
-
-const firebaseConfig = {
-  apiKey: "AIzaSyB_2DPtUD7wba2Vd7SS2pKwGIo4u6zgjs0",
-  authDomain: "dreamwed-1.firebaseapp.com",
-  projectId: "dreamwed-1",
-  storageBucket: "dreamwed-1.appspot.com",
-  messagingSenderId: "964565541944",
-  appId: "1:964565541944:web:e130ff2f595cd5adb9b2cd",
-  measurementId: "G-BTT31BGCCL"
-}
-const app = firebase.initializeApp(firebaseConfig);
-const firestore = firebase.firestore()
-
-const auth = getAuth(app)
 
 
-const loginHandler = (e) => {
-  e.preventDefault();
-  const provider = new GoogleAuthProvider();
-  signInWithPopup(auth, provider)
-    .then((result) => {
-      console.log("Success");
-    }).catch((error) => {
-      console.log(error);
-    });
-
-}
-
-const logoutHandler = (e) => {
-  e.preventDefault()
-  auth.signOut().then(function () {
-    console.log("Success");
-  }).catch(function (error) {
-    console.log(error);
-  });
-}
+import { UserAuth } from './context/AuthContext';
+import { CollectionsCtx } from './context/CollectionsContext';
+import { useEffect, useState } from 'react';
 
 
 function App() {
+  const { user, logOut } = UserAuth()
 
-  const [user] = useAuthState(auth)
-  const categoriesRef = firestore.collection('categories');
-  const query = categoriesRef.orderBy('createdAt').limit(25)
-  const categories = useCollectionData(query)
-  console.log(categories[0]);
+  const { categories, expenses } = CollectionsCtx();
+
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    if (!(!categories && !expenses)) {
+      //console.log(categories.length);
+      if (categories.length > 0 && expenses.length > 0) {
+        setIsLoading(false)
+      }
+    }
+
+  }, [categories, expenses,logOut]);
+
   return (
-    <Router>
-      <div className='pt-3 d-flex flex-column min-vh-100 justify-content-center container-fluid' style={{ fontFamily: "Lato" }}>
-        <Header user={user} loginHandler={loginHandler} logoutHandler={logoutHandler} />
-        {user === null && <h1 className='text-center'>Please login to continue</h1>}
-        {user  && categories[0] && categories[0].length > 0 &&
-          <>
-            <MainNav />
-            <Budget categories={categories[0]} />
-          </>
-        }
-        <Footer></Footer>
-      </div>
-    </Router>
+
+
+    <div className='pt-3 d-flex flex-column min-vh-100 justify-content-center container-fluid' style={{ fontFamily: "Lato" }}>
+      <Header />
+
+      <MainNav />
+      {user === null && <><h1 className='text-center my-auto'>Please login to continue</h1></>}
+      {user && isLoading && <p className='text-center'>Loading...</p>}
+      {console.log(user) }
+
+      {user && !isLoading &&
+        <Routes>
+
+          <Route exact path='/' element={<p>Choose a tool from the navigation bar</p>}></Route>
+          <Route path='/budget/' element={
+            <Budget categories={categories} expenses={expenses} />
+          } />
+          <Route path='/budget/:id' element={
+            <Budget categories={categories} expenses={expenses} />
+          } />
+
+          <Route exact path='/checklist' element={<p className='text-center'>Checklist</p>}></Route>
+
+          <Route exact path='/guestList' element={<p className='text-center'>Guest List</p>}></Route>
+        </Routes>
+      }
+
+      <Footer></Footer>
+    </div>
+
   );
 }
 
