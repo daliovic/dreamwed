@@ -5,16 +5,20 @@ import { auth } from "../firebase"
 const AuthContext = createContext()
 
 export const AuthContextProvider = ({ children }) => {
-    const [user, setUser] = useState({})
+    const [user, setUser] = useState(null)
 
     const googleSignIn = () => {
         const provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).catch(error => {console.log(error)})
+        signInWithPopup(auth, provider).catch(error => { console.log(error) })
     }
 
     const logOut = () => {
-        signOut(auth).catch(error => {console.log(error)})
+        signOut(auth).catch(error => { console.log(error) })
     }
+
+    // const handleAuthStateChange = async (userCredential) => {
+    //     console.log(userCredential);
+    //   };
 
     useEffect(() => {
         const unsubscribe = () => {
@@ -26,6 +30,13 @@ export const AuthContextProvider = ({ children }) => {
             unsubscribe()
         }
     }, []);
+    useEffect(() => {
+        
+
+        onAuthStateChanged(auth, (currentUser) => {
+            setUser(currentUser);
+        })
+      }, []);
 
 
     return (

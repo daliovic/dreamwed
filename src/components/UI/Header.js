@@ -41,8 +41,8 @@ function Header() {
             <a href="/" onClick={onLogin}>Login</a> :
             <div className='d-flex'>
               <span>{user.displayName}</span>
-              <span onClick={onLogout}>
-                {/* <img src={user.photoURL} alt="" width={30} className="ms-2 rounded-circle" />  */}
+              <span className='ms-3' onClick={onLogout}>
+                <img src={user.photoURL} alt="" width={30} className="me-2 rounded-circle" /> 
                 Logout
               </span>
             </div>}
