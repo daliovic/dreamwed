@@ -30,21 +30,18 @@ function App() {
       }
     }
 
-  }, [categories, expenses, logOut]);
+  }, [categories, expenses,logOut]);
 
   return (
 
 
     <div className='pt-3 d-flex flex-column min-vh-100 justify-content-center container-fluid' style={{ fontFamily: "Lato" }}>
-      <p onClick={() => {
-        console.log(user)
-      }}>
-        Click</p>
       <Header />
 
       <MainNav />
       {user === null && <><h1 className='text-center my-auto'>Please login to continue</h1></>}
-      {user !== null && isLoading && <p className='text-center'>Loading...</p>}
+      {user && isLoading && <p className='text-center'>Loading...</p>}
+      {console.log(user) }
 
       {user && !isLoading &&
         <Routes>
