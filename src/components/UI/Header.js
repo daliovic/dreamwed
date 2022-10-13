@@ -42,7 +42,7 @@ function Header() {
             <div className='d-flex'>
               <span>{user.displayName}</span>
               <span onClick={onLogout}>
-                {/* <img src={user.photoURL} alt="" width={30} className="ms-2 rounded-circle" />  */}
+                <img src={user.photoURL} alt="" width={30} className="mx-3 rounded-circle" /> 
                 Logout
               </span>
             </div>}

@@ -1,62 +1,73 @@
 import 'firebase/compat/firestore'
-import { createContext, useContext, useEffect, useState } from 'react'
-import { collection, getFirestore, getDocs } from 'firebase/firestore'
-
-// import firebase from 'firebase/compat/app'
-// const firestore = firebase.firestore()
-// import { useCollectionData } from 'react-firebase-hooks/firestore'
+import { createContext, useContext, useEffect, useState } from 'react'// eslint-disable-next-line
+import {
+    collection, getFirestore, onSnapshot,
+    addDoc, query, orderBy, deleteDoc, doc, updateDoc
+} from 'firebase/firestore'
 
 const db = getFirestore()
-
-
-
-
-
 
 
 const CollectionsContext = createContext()
 
 export const CollectionsContextProvider = ({ children }) => {
-    const [categories, setCategories] = useState([]);// eslint-disable-next-line
+    const [categories, setCategories] = useState([]);
     const [expenses, setExpenses] = useState([]);
 
+    const expensesRef = collection(db, 'expenses');
+    const categoriesRef = collection(db, 'categories');
+
+
+    const addExpense = (value) => {
+        addDoc(expensesRef, value)
+    }
+    const deleteExpense = (id) => {
+        deleteDoc(doc(expensesRef, id))
+    }
+    const updateExpense = (id, value) => {
+        updateDoc(doc(expensesRef, id), value)
+    }
+
+    const deleteCategory = (id) => {
+        deleteDoc(doc(categoriesRef, id)).catch(err => console.log(err))
+    }
+
+    const addCategory = (value) => {
+        addDoc(categoriesRef, value)
+    }
+    const updateCategory = (id, value) => {
+        updateDoc(doc(categoriesRef, id), value)
+    }
 
     useEffect(() => {
-
-        const categoriesRef = collection(db, 'categories');
-        getDocs(categoriesRef).then((snapshot) => {
-           // console.log(snapshot.docs.length);
-            snapshot.docs.forEach(doc => {
-                setCategories(prevState => [...prevState,{...doc.data(), id: doc.id} ])
-                //categories.push({ ...doc.data(), id: doc.id })
-            })
-            //console.log(categories + " FROM CTX");
-        }).catch(err => { console.log(err.message) })
-
         const expensesRef = collection(db, 'expenses');
-        getDocs(expensesRef).then((snapshot) => {
+        const categoriesRef = collection(db, 'categories');
+
+        onSnapshot(categoriesRef, (snapshot) => {
+            setCategories([]);
             snapshot.docs.forEach(doc => {
-                setExpenses(prevState => [...prevState,{...doc.data(), id: doc.id} ])
-                // setCategories(prevState => {return[...prevState,  {...doc.data(), id: doc.id} ]})
-                // expenses.push({ ...doc.data(), id: doc.id })
+                setCategories(prevState => [...prevState, { ...doc.data(), id: doc.id }])
             })
-        }).catch(err => { console.log(err.message) })
+        })
+
+        const q = query(expensesRef, orderBy("createdAt"))
+        onSnapshot(q, (snapshot) => {
+            setExpenses([]);
+            snapshot.docs.forEach(doc => {
+                setExpenses(prevState => [...prevState, { ...doc.data(), id: doc.id }])
+            })
+        })
     }, []);
-
-
-    // const categoriesRef = firestore.collection('categories');
-    // let query = categoriesRef.orderBy('createdAt').limit(25)
-    // const categories = useCollectionData(query)
-
-    // const expensesRef = firestore.collection('expenses');
-    // query = expensesRef.orderBy('createdAt').limit(25)
-    // const expenses = useCollectionData(query)
 
 
 
 
     return (
-        <CollectionsContext.Provider value={{ categories, expenses }}>
+        <CollectionsContext.Provider value={{
+            categories, expenses,
+            updateExpense, deleteExpense, addExpense,
+            deleteCategory, addCategory, updateCategory
+        }}>
             {children}
         </CollectionsContext.Provider>
     )

@@ -79,8 +79,7 @@ function Budget(props) {
         <div className="row my-3 flex-fill">
             <div className="d-flex flex-row col-9 mx-auto">
                 <BudgetSidebar categories={props.categories} />
-                    {console.log(props.categories[0].uid)}
-                <CategoryMain catergory={props.categories[+(catID)]} icon={icons[+(catID)].icon} expenses={props.expenses} />
+                <CategoryMain category={props.categories[+(catID)]} icon={icons[+(catID)].icon} expenses={props.expenses} />
             </div>
         </div>
     );
