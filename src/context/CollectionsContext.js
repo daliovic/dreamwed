@@ -43,7 +43,7 @@ export const CollectionsContextProvider = ({ children }) => {
         const expensesRef = collection(db, 'expenses');
         const categoriesRef = collection(db, 'categories');
 
-        onSnapshot(categoriesRef, (snapshot) => {
+        onSnapshot(query(categoriesRef, orderBy("createdAt")), (snapshot) => {
             setCategories([]);
             snapshot.docs.forEach(doc => {
                 setCategories(prevState => [...prevState, { ...doc.data(), id: doc.id }])

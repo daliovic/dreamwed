@@ -1,28 +1,31 @@
-import React, { useEffect, useRef, useState } from 'react';
-import Button from 'react-bootstrap/Button';
-import Modal from 'react-bootstrap/Modal';
+import React, { useEffect, useRef, useState } from 'react'
+import { Button, Modal } from 'react-bootstrap';
+import { MdModeEditOutline } from 'react-icons/md';
 import { Link } from 'react-router-dom';
-import { CollectionsCtx } from '../../context/CollectionsContext';
-import { BiPencil } from 'react-icons/bi';
+import { TodoCtx } from '../../context/TodoContext';
 
-function AddCategory(props) {
+export default function UpdateTodo(props) {
     const [show, setShow] = useState(false);
-    const { updateCategory } = CollectionsCtx();
-    const [inputValue, setInputValue] = useState(props.name);
-    const nameRef = useRef()
+    const { updateTodo } = TodoCtx();
+    const [inputValue, setInputValue] = useState(props.title);
+    const titleRef = useRef()
 
 
 
-    const addCategoryHandler = () => {
-        updateCategory(props.id,{ name: nameRef.current.value});
+    const updateTodoHandler = () => {
+        updateTodo(props.id, { title: titleRef.current.value });
         setShow(false);
-        console.log(nameRef.current.value);
+        console.log(titleRef.current.value);
     }
     const handleClose = () => setShow(false);
-    const handleShow = () => setShow(true);
-    useEffect(() => {
-        setInputValue(props.name);
-    }, [props.name]);
+    const handleShow = (e) => {
+        e.preventDefault();
+        console.log('show');
+        setShow(true); }
+    useEffect
+        (() => {
+            setInputValue(props.title);
+        }, [props.title]);
 
     return (
         <>
@@ -30,8 +33,8 @@ function AddCategory(props) {
         Launch static backdrop modal
       </Button> */}
 
-            <Link onClick={handleShow}>
-                <i><BiPencil color='A663CC' /></i>
+            <Link onClick={ handleShow } className='me-2'>
+                <MdModeEditOutline size={20}/>
             </Link>
 
             <Modal
@@ -41,24 +44,24 @@ function AddCategory(props) {
                 keyboard={false}
             >
                 <Modal.Header closeButton>
-                    <Modal.Title>Edit category name</Modal.Title>
+                    <Modal.Title>Edit todo title</Modal.Title>
                 </Modal.Header>
                 <Modal.Body>
-                    <label htmlFor="categoryName" >Category name:</label>
+                    <label htmlFor="categoryName" >Todo title:</label>
                     <input
                         name="categoryName"
                         type="text"
                         className='form-control mt-2'
-                        ref={nameRef} 
+                        ref={titleRef}
                         value={inputValue}
-                        onChange={()=> setInputValue(nameRef.current.value)}/>
+                        onChange={() => setInputValue(titleRef.current.value)} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="light" onClick={handleClose}>
                         Cancel
                     </Button>
                     <button
-                        onClick={addCategoryHandler}
+                        onClick={updateTodoHandler}
                         className=" mx-2 btn btn-outline-light"
                         style={{ color: "white", backgroundColor: "#A663CC" }}>
                         Update
@@ -68,6 +71,5 @@ function AddCategory(props) {
             </Modal>
         </>
     );
-}
 
-export default AddCategory;
+}

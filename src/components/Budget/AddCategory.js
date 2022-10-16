@@ -13,12 +13,13 @@ function AddCategory(props) {
 
 
     const addCategoryHandler = () => {
-        addCategory({ name: nameRef.current.value, uid : user.uid , cost : 0 });
+        addCategory({ name: nameRef.current.value, uid: user.uid, cost: 0, createdAt: new Date() });
         setShow(false);
         console.log(nameRef.current.value);
     }
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
+
 
     return (
         <>
@@ -50,9 +51,12 @@ function AddCategory(props) {
                     <label htmlFor="categoryName" >Category name:</label>
                     <input
                         name="categoryName"
-                        type="text" 
+                        type="text"
                         className='form-control mt-2'
-                    ref={nameRef}/>
+                        ref={nameRef}
+                        autoFocus
+                        autoComplete="off"
+                        onKeyDown={(e) => { if (e.keyCode === 13) addCategoryHandler() }} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="light" onClick={handleClose}>
@@ -60,8 +64,7 @@ function AddCategory(props) {
                     </Button>
                     <button
                         onClick={addCategoryHandler}
-                        className=" mx-2 btn btn-outline-light"
-                        style={{ color: "white", backgroundColor: "#A663CC" }}>
+                        className=" mx-2 btn btn-outline-light add-button">
                         Add
                     </button>
                     {/* <Button variant="primary">Understood</Button> */}

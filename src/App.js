@@ -13,6 +13,8 @@ import { Route, Routes } from 'react-router-dom'
 import { UserAuth } from './context/AuthContext';
 import { CollectionsCtx } from './context/CollectionsContext';
 import { useEffect, useState } from 'react';
+import Todo from './components/Todo/Todo';
+import GuestsList from './components/GuestsList';
 
 
 function App() {
@@ -55,9 +57,9 @@ function App() {
             <Budget categories={categories.filter(item => item.uid === user.uid)} expenses={expenses} />
           } />
 
-          <Route exact path='/checklist' element={<p className='text-center'>Checklist</p>}></Route>
+          <Route exact path='/checklist' element={<Todo user={user}/>}></Route>
 
-          <Route exact path='/guestList' element={<p className='text-center'>Guest List</p>}></Route>
+          <Route exact path='/guestList' element={<GuestsList/>}></Route>
         </Routes>
       }
 

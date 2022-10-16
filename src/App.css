@@ -39,6 +39,10 @@
   }
 }
 
+.width-30 {
+  width: 30% !important;
+}
+
 .highlight-bar {
   width: 4px;
   height: 100%;
@@ -72,9 +76,8 @@ a.active {
 .expense-group input {
   outline: none !important;
   box-shadow: none;
-  min-width: 10px; 
-  background-color: rgba(0,0,0,0)
-  ;
+  min-width: 10px;
+  background-color: rgba(0, 0, 0, 0);
 }
 
 .updatedSucc {
@@ -89,6 +92,7 @@ a.active {
   50% {
     color: #20a80e;
   }
+
   100% {
     color: #212529;
   }
@@ -103,11 +107,26 @@ a.active {
   50% {
     background-color: #20a80e15;
   }
+
   100% {
     background-color: #20a80e00;
   }
 }
 
-.add-link{
-  color: #A663CC!important;
+.add-link {
+  color: #A663CC !important;
+}
+
+.add-button {
+  color: white !important;
+  background-color: #A663CC !important
+}
+
+.add-button:hover {
+  color: white !important;
+  background-color: rgb(71, 20, 130) !important
+}
+
+.todo-complete {
+  text-decoration: line-through;
 }

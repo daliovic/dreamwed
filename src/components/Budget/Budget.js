@@ -73,12 +73,14 @@ function Budget(props) {
        });
     
        
-    let catID = useParams().id
+    let catID = (useParams().id)
     if (!catID) catID=0
+
+
     return (
         <div className="row my-3 flex-fill">
-            <div className="d-flex flex-row col-9 mx-auto">
-                <BudgetSidebar categories={props.categories} />
+            <div className="d-flex flex-row col-9 mx-auto justify-content-between">
+                <BudgetSidebar categories={props.categories} expenses={props.expenses}/>
                 <CategoryMain category={props.categories[+(catID)]} icon={icons[+(catID)].icon} expenses={props.expenses} />
             </div>
         </div>

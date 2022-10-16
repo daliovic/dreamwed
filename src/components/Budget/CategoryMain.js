@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { BsTrash } from 'react-icons/bs';
 import { FiPlusCircle } from 'react-icons/fi';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { CollectionsCtx } from '../../context/CollectionsContext';
 import classes from './CategoryMain.module.css'
 import OneExpense from './OneExpense';
@@ -14,6 +14,8 @@ function CategoryMain(props) {// eslint-disable-next-line
     const [totalEstimatedCost, setTotalEstimatedCost] = useState(0);
     const [totalFinalCost, setTotalFinalCost] = useState(0);
     const [totalPaid , setTotalPaid] = useState(0);
+
+    const navigate = useNavigate();
     
     useEffect(() => {
         if (props.category){
@@ -29,7 +31,11 @@ function CategoryMain(props) {// eslint-disable-next-line
     const deleteCategoryHandler = () => {
         //console.log(props.category.id);
         deleteCategory(props.category.id)
+        navigate("/budget");
+
     }
+
+    
 
 
 
