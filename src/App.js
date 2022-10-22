@@ -26,13 +26,10 @@ function App() {
 
   useEffect(() => {
     if ((categories!==null && expenses!==null)) {
-      //console.log(categories.length);
       if (categories.length > 0 && expenses.length > 0) {
         setIsLoading(false)
       }
     }
-
-    console.log("-");
   }, [categories, expenses])
 
   return (
