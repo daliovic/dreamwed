@@ -1,5 +1,5 @@
 import React from 'react'
-import invitation from '../../src/assets/Invitation.svg'
+// import invitation from '../../src/assets/Invitation.svg'
 
 function GuestsList(props) {
 

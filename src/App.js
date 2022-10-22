@@ -5,7 +5,7 @@ import Header from './components/UI/Header';
 import MainNav from './components/UI/MainNav'
 import Footer from './components/UI/Footer';
 import Budget from './components/Budget/Budget';
-import { Route, Routes } from 'react-router-dom'
+import { Route, Routes, useLocation, useNavigate } from 'react-router-dom'
 
 
 
@@ -24,13 +24,21 @@ function App() {
 
   const [isLoading, setIsLoading] = useState(true);
 
+
+  const navigate = useNavigate();
+  const location = useLocation();
   useEffect(() => {
-    if ((categories!==null && expenses!==null)) {
+
+    console.log(location.pathname);
+    if (location.pathname !== '/' && !user) {
+      navigate('/')
+    }
+    if ((categories !== null && expenses !== null)) {
       if (categories.length > 0 && expenses.length > 0) {
         setIsLoading(false)
       }
     }
-  }, [categories, expenses])
+  }, [categories, expenses , user, navigate, location.pathname])
 
   return (
 
@@ -54,9 +62,9 @@ function App() {
             <Budget categories={categories.filter(item => item.uid === user.uid)} expenses={expenses} />
           } />
 
-          <Route exact path='/checklist' element={<Todo user={user}/>}></Route>
+          <Route exact path='/checklist' element={<Todo user={user} />}></Route>
 
-          <Route exact path='/guestList' element={<GuestsList/>}></Route>
+          <Route exact path='/guestList' element={<GuestsList />}></Route>
         </Routes>
       }
 
