@@ -6,7 +6,7 @@ import MainNavItem from './MainNavItem';
 const NAV_ITEMS = [
     { text: "Budget", link: "/budget" },
     { text: "Checklist", link: "/checklist" },
-    { text: "Guest List", link: "/guestList" },
+    { text: "Invitation", link: "/guestList" },
 ]
 const NAV_ICONS = [AiOutlineCalculator, GoChecklist, MdPeopleOutline]
 
