@@ -7,15 +7,18 @@ import { AuthContextProvider } from './context/AuthContext';
 import { CollectionsContextProvider } from './context/CollectionsContext';
 import { BrowserRouter } from 'react-router-dom';
 import { TodoContextProvider } from './context/TodoContext';
+import { InvitationContextProvider } from './context/InvitationsContext';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
 root.render(
   <AuthContextProvider>
     <TodoContextProvider>
       <CollectionsContextProvider>
-        <BrowserRouter>
-          <App />
-        </BrowserRouter>
+        <InvitationContextProvider>
+          <BrowserRouter>
+            <App />
+          </BrowserRouter>
+        </InvitationContextProvider>
       </CollectionsContextProvider>
     </TodoContextProvider>
   </AuthContextProvider>

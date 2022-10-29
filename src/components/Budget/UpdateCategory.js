@@ -7,6 +7,7 @@ import { BiPencil } from 'react-icons/bi';
 
 function AddCategory(props) {
     const [show, setShow] = useState(false);
+    const [isMouseIn, setIsMouseIn] = useState(false);
     const { updateCategory } = CollectionsCtx();
     const [inputValue, setInputValue] = useState(props.name);
     const nameRef = useRef()
@@ -14,7 +15,7 @@ function AddCategory(props) {
 
 
     const addCategoryHandler = () => {
-        updateCategory(props.id,{ name: nameRef.current.value});
+        updateCategory(props.id, { name: nameRef.current.value });
         setShow(false);
         console.log(nameRef.current.value);
     }
@@ -23,6 +24,16 @@ function AddCategory(props) {
     useEffect(() => {
         setInputValue(props.name);
     }, [props.name]);
+
+    const buttonInHandler = () => {
+        console.log('in');
+        setIsMouseIn(true);
+    }
+    const buttonOutHandler = () => {
+        console.log('out');
+        setIsMouseIn(false);
+
+    }
 
     return (
         <>
@@ -49,20 +60,24 @@ function AddCategory(props) {
                         name="categoryName"
                         type="text"
                         className='form-control mt-2'
-                        ref={nameRef} 
+                        ref={nameRef}
                         value={inputValue}
-                        onChange={()=> setInputValue(nameRef.current.value)}/>
+                        onChange={() => setInputValue(nameRef.current.value)} />
                 </Modal.Body>
                 <Modal.Footer>
                     <Button variant="light" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <button
-                        onClick={addCategoryHandler}
-                        className=" mx-2 btn btn-outline-light"
-                        style={{ color: "white", backgroundColor: "#A663CC" }}>
-                        Update
-                    </button>
+                    <div className={`outer ${isMouseIn ? 'animatePosIn' : 'animatePosOut'}`}
+                        onMouseEnter={buttonInHandler}
+                        onMouseLeave={buttonOutHandler}>
+                        <button
+                            onClick={addCategoryHandler}
+                            className=" mx-2 btn btn-outline-light"
+                            style={{ color: "white", backgroundColor: "#A663CC" }}>
+                            Update
+                        </button>
+                    </div>
                     {/* <Button variant="primary">Understood</Button> */}
                 </Modal.Footer>
             </Modal>

@@ -1,3 +1,8 @@
+
+@font-face {
+  font-family: 'Bargiery', sans-serif;
+  src: url('http://fonts.cdnfonts.com/css/bargiery')
+}
 .App {
   text-align: center;
   font-family: Lato !important;
@@ -129,4 +134,27 @@ a.active {
 
 .todo-complete {
   text-decoration: line-through;
+}
+
+.outer {
+  border: 1px solid;
+  padding: 10px;
+  background-color: #ddd;
+
+}
+.animatePosIn {
+  animation: buttonPos 600ms forwards;
+}
+.animatePosOut {
+  animation: buttonPos 600ms backwards;
+}
+
+@keyframes buttonPos {
+  0% {
+    transform: translateX(0px);
+  }
+
+  100% {
+    transform: translateX(-200px);
+  }
 }
