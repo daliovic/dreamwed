@@ -68,16 +68,16 @@ function AddCategory(props) {
                     <Button variant="light" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <div className={`outer ${isMouseIn ? 'animatePosIn' : 'animatePosOut'}`}
+                    {/* <div className={`outer ${isMouseIn ? 'animatePosIn' : 'animatePosOut'}`}
                         onMouseEnter={buttonInHandler}
-                        onMouseLeave={buttonOutHandler}>
+                        onMouseLeave={buttonOutHandler}> */}
                         <button
                             onClick={addCategoryHandler}
                             className=" mx-2 btn btn-outline-light"
                             style={{ color: "white", backgroundColor: "#A663CC" }}>
                             Update
                         </button>
-                    </div>
+                    {/* </div> */}
                     {/* <Button variant="primary">Understood</Button> */}
                 </Modal.Footer>
             </Modal>
