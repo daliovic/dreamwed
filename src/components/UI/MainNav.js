@@ -1,14 +1,15 @@
 import React from 'react';
 import { AiOutlineCalculator } from 'react-icons/ai';
 import { GoChecklist } from 'react-icons/go';
-import { MdPeopleOutline } from 'react-icons/md'
+import { MdPeopleOutline, MdOutlineMarkEmailRead } from 'react-icons/md'
 import MainNavItem from './MainNavItem';
 const NAV_ITEMS = [
     { text: "Budget", link: "/budget" },
     { text: "Checklist", link: "/checklist" },
-    { text: "Invitation", link: "/guestList" },
+    { text: "Invitation", link: "/invitation" },
+    { text: "Guests List", link: "/guestList" },
 ]
-const NAV_ICONS = [AiOutlineCalculator, GoChecklist, MdPeopleOutline]
+const NAV_ICONS = [AiOutlineCalculator, GoChecklist, MdOutlineMarkEmailRead, MdPeopleOutline]
 
 
 function MainNav(props) {
