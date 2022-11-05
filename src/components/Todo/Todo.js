@@ -17,6 +17,11 @@ export default function Todo(props) {
         setInput("")
     }
 
+    //sort todo array by isCompleted
+    const sortedTodos = todos.sort((a, b) => {
+        return a.isCompleted - b.isCompleted
+    })
+
 
 
     return (
@@ -40,7 +45,7 @@ export default function Todo(props) {
                             </form>
 
                             <ul className="list-group mb-0">
-                                {todos.map(item => <TodoItem user={props.user} 
+                                {sortedTodos.map(item => <TodoItem user={props.user} 
                                 title={item.title} 
                                 isCompleted={item.isCompleted} 
                                 key={item.id} 
