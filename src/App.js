@@ -14,7 +14,7 @@ import { UserAuth } from './context/AuthContext';
 import { CollectionsCtx } from './context/CollectionsContext';
 import { useEffect, useState } from 'react';
 import Todo from './components/Todo/Todo';
-import Invitation from './components/Invitation';
+import GuestsList from './components/GuestsList';
 
 
 function App() {
@@ -29,6 +29,7 @@ function App() {
   const location = useLocation();
   useEffect(() => {
 
+    console.log(location.pathname);
     if (location.pathname !== '/' && !user) {
       navigate('/')
     }
@@ -48,6 +49,7 @@ function App() {
       <MainNav />
       {user === null && <><h1 className='text-center my-auto'>Please login to continue</h1></>}
       {user && isLoading && <p className='text-center'>Loading...</p>}
+      {/* {console.log(user) } */}
 
       {user && !isLoading &&
         <Routes>
@@ -62,8 +64,7 @@ function App() {
 
           <Route exact path='/checklist' element={<Todo user={user} />}></Route>
 
-          <Route exact path='/invitation' element={<Invitation />}></Route>
-          <Route exact path='/guestList' element={<Invitation />}></Route>
+          <Route exact path='/guestList' element={<GuestsList />}></Route>
         </Routes>
       }
 
