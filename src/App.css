@@ -158,3 +158,8 @@ a.active {
     transform: translateX(-200px);
   }
 }
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
+  border-color: #D7B1D7!important;
+  background-color: #D7B1D7!important;
+}
