@@ -138,8 +138,8 @@ function Invitation() {
 
                 <div className="container py-5 d-flex ">
                     <div className="col mx-auto d-flex" style={{ height: "600px" }}>
-                        <PDFViewer showToolbar={false} className="h-100 mx-auto" style={{ width: 425 }}>
-                            <Document >
+                        <PDFViewer showToolbar={false} className="react-pdf__Page__canvas" >
+                            <Document className="react-pdf__Page">
                                 <Page size="A4" style={styles.body}>
                                     <View >
                                         <Image style={{

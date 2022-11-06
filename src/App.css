@@ -183,5 +183,15 @@ a.active {
 input:-webkit-autofill {
   -webkit-background-clip: text;
   background-clip: text;
-
 }
+
+.react-pdf__Page__canvas {
+  margin: 0 auto !important;
+  padding: 0 !important;
+  width: 61.018% !important;
+  height: 90% !important;
+}
+/* .react-pdf__Page {
+  width: 10% !important;
+  height: 10% !important;
+} */
