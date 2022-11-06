@@ -1,5 +1,6 @@
 import React from 'react';
 import { Container, Navbar } from 'react-bootstrap';
+import { Link } from 'react-router-dom';
 
 import logo from "../../assets/DreamWed Logo.svg"
 import { UserAuth } from '../../context/AuthContext';
@@ -41,10 +42,10 @@ function Header() {
             <a href="/" onClick={onLogin}>Login</a> :
             <div className='d-flex'>
               <span>{user.displayName}</span>
-              <span onClick={onLogout}>
+              <Link onClick={onLogout}>
                 <img src={user.photoURL} alt="" width={30} className="mx-3 rounded-circle" /> 
                 Logout
-              </span>
+              </Link>
             </div>}
           {/* eslint-disable-next-line  */}
         </Navbar.Text>

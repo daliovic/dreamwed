@@ -1,8 +1,16 @@
-
 @font-face {
   font-family: 'Bargiery', sans-serif;
   src: url('http://fonts.cdnfonts.com/css/bargiery')
 }
+
+:root {
+  --primary: #A663CC;
+}
+
+html {
+  width: 100vw;
+}
+
 .App {
   text-align: center;
   font-family: Lato !important;
@@ -136,15 +144,23 @@ a.active {
   text-decoration: line-through;
 }
 
+.list-parent ul {
+  display: flex;
+  flex-direction: column;
+  padding-left: 0;
+}
+
 .outer {
   border: 1px solid;
   padding: 10px;
   background-color: #ddd;
 
 }
+
 .animatePosIn {
   animation: buttonPos 600ms forwards;
 }
+
 .animatePosOut {
   animation: buttonPos 600ms backwards;
 }
@@ -159,7 +175,13 @@ a.active {
   }
 }
 
-.custom-checkbox .custom-control-input:checked ~ .custom-control-label::before {
-  border-color: #D7B1D7!important;
-  background-color: #D7B1D7!important;
+.form-check-input:checked {
+  border-color: var(--primary) !important;
+  background-color: var(--primary) !important;
+}
+
+input:-webkit-autofill {
+  -webkit-background-clip: text;
+  background-clip: text;
+
 }

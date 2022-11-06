@@ -4,6 +4,7 @@ import Modal from 'react-bootstrap/Modal';
 import { Link } from 'react-router-dom';
 import { CollectionsCtx } from '../../context/CollectionsContext';
 import { BiPencil } from 'react-icons/bi';
+import { motion } from "framer-motion/dist/framer-motion"
 
 function AddCategory(props) {
     const [show, setShow] = useState(false);
@@ -35,11 +36,9 @@ function AddCategory(props) {
 
     }
 
+
     return (
         <>
-            {/* <Button variant="primary" onClick={handleShow}>
-        Launch static backdrop modal
-      </Button> */}
 
             <Link onClick={handleShow}>
                 <i><BiPencil color='A663CC' /></i>
@@ -68,9 +67,8 @@ function AddCategory(props) {
                     <Button variant="light" onClick={handleClose}>
                         Cancel
                     </Button>
-                    <div className={`outer ${isMouseIn ? 'animatePosIn' : 'animatePosOut'}`}
-                        onMouseEnter={buttonInHandler}
-                        onMouseLeave={buttonOutHandler}>
+                    {/* <div className={`outer`}> */}
+                    <div>
                         <button
                             onClick={addCategoryHandler}
                             className=" mx-2 btn btn-outline-light"

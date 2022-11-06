@@ -14,7 +14,7 @@ import { UserAuth } from './context/AuthContext';
 import { CollectionsCtx } from './context/CollectionsContext';
 import { useEffect, useState } from 'react';
 import Todo from './components/Todo/Todo';
-import GuestsList from './components/GuestsList';
+import Invitation from './components/Invitation';
 
 
 function App() {
@@ -38,7 +38,7 @@ function App() {
         setIsLoading(false)
       }
     }
-  }, [categories, expenses , user, navigate, location.pathname])
+  }, [categories, expenses, user, navigate, location.pathname])
 
   return (
 
@@ -64,7 +64,7 @@ function App() {
 
           <Route exact path='/checklist' element={<Todo user={user} />}></Route>
 
-          <Route exact path='/guestList' element={<GuestsList />}></Route>
+          <Route exact path='/invitation' element={<Invitation />}></Route>
         </Routes>
       }
 

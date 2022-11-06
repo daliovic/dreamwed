@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { CollectionsCtx } from '../../context/CollectionsContext';
 
+import { motion } from "framer-motion/dist/framer-motion"
 const OneExpense = (props) => {
 
     const [expenseState, setExpenseState] = useState(props.expense)
@@ -36,7 +37,7 @@ const OneExpense = (props) => {
     }, [succGreen]);
     return (
 
-        <li className={`${props.classes["expenses-item"]} list-group-item 
+        <motion.li variants={props.variants} className={`${props.classes["expenses-item"]} list-group-item 
                     border-0 border-bottom rounded-0 d-flex  ${succGreen} `} onKeyDown={enterKeyHandler}>
             <span className=" my-auto col-4">
                 <div className='expense-group'>
@@ -104,7 +105,7 @@ const OneExpense = (props) => {
             </span>
             <span className=" my-auto ms-auto" onClick={() => { deleteExpense(props.expense.id) }}>...</span>
 
-        </li>
+        </motion.li>
     );
 };
 
