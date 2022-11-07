@@ -2,6 +2,8 @@ import React from 'react'
 import { Button, Dropdown } from 'react-bootstrap'
 //import reset icon
 import { BsArrowRepeat } from 'react-icons/bs'
+import { motion } from "framer-motion/dist/framer-motion"
+
 const STYLE_PROPERTIES = [
     "*LAYOUT*",
     "bottom",
@@ -101,16 +103,30 @@ const STYLE_PROPERTIES = [
     "borderBottomLeftRadius",
     "borderRadius",
 ]
-export default function InvitationDetailItem({ invitationDetails, setInvitationDetails, detailItem, adv }) {
+export default function InvitationDetailItem({ invitationDetails, setInvitationDetails, detailItem, adv, i }) {
     const showClass = !adv ? "d-none" : "d-flex"
 
     const resetStylesHandler = () => {
         setInvitationDetails(prev => ({...prev, [detailItem]: {...prev[detailItem], styles: {}}}))
     }
 
+    const divVariants = {
+        hidden: {
+            opacity: 0,
+            x: 50,
+        },
+        visible: {
+            opacity: 1,
+            x: 0,
+            transition: {
+                duration: 0.8,
+                delay: 0.15*i,
+            }
+        },
+    }
     return (
-        <div>
-            <div className="mb-2">
+        <motion.div variants={divVariants} initial="hidden" animate="visible"  layout>
+            <motion.div className="mb-2">
                 <span className="col-4" style={{ textTransform: "capitalize" }}>{detailItem}</span>
                 <input
                     placeholder={invitationDetails[detailItem].name}
@@ -120,7 +136,7 @@ export default function InvitationDetailItem({ invitationDetails, setInvitationD
                     // onBlur={(e) => { setInvitationDetails({ ...invitationDetails, [detailItem]: { ...invitationDetails[detailItem], name: e.target.value } }) }}
                      />
 
-            </div>
+            </motion.div>
             <div className={`mb-4 ${showClass} `} >
                 <div className='col-4 '>
                     <span className="col-4">Property Name</span>
@@ -182,6 +198,6 @@ export default function InvitationDetailItem({ invitationDetails, setInvitationD
 
 
             </div>
-        </div>
+        </motion.div>
     )
 }

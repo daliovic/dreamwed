@@ -7,6 +7,8 @@ import InvitationDetailItem from './InvitationDetailItem';
 import { InvitationCtx } from '../context/InvitationsContext';
 import { Button, Dropdown } from 'react-bootstrap';
 import { BsTrash } from 'react-icons/bs'
+import { motion } from "framer-motion/dist/framer-motion"
+
 
 Font.register({
     family: "Bargiery",
@@ -131,12 +133,28 @@ function Invitation() {
         // })
     }, [invitations, deleteInvitation, currentInvitation, addInvitation, updateInvitation, DEFAULT_INVITATION])
 
+    const pdfViewerVariants = {
+        init: {
+            opacity: 0,
+            transition: {
+                duration: 1,
+                delay: 3
+            }
+        },
+        rest: {
+            opacity: 1,
+            transition: {
+                duration: 0.5,
+                delay: 0.5
+            }
+        }
+    }
     return (
         <>
             {isLoading ? <p className='text-center'>Loading...</p> :
 
                 <div className="container py-5 d-flex ">
-                    <div className="col-5 mx-auto d-flex" style={{ height: "600px" }}>
+                    <motion.div variants={pdfViewerVariants} animate="rest" initial="init" className="col-5 mx-auto d-flex" style={{ height: "600px" }}>
                         <PDFViewer showToolbar={false} className="react-pdf__Page__canvas" >
                             <Document className="react-pdf__Page">
                                 <Page size="A4" style={styles.body}>
@@ -195,7 +213,7 @@ function Invitation() {
                                 </Page>
                             </Document>
                         </PDFViewer>
-                    </div>
+                    </motion.div>
 
                     <div className="col d-flex flex-column ps-3">
                         <div className='d-flex justify-content-between align-items-center'>
@@ -234,12 +252,9 @@ function Invitation() {
                             </Dropdown>
                             <button onClick={() => { setCurrentInvitation(0); deleteInvitation(invitations[currentInvitation].id) }} className=" mx-2 btn btn-outline-light" style={{ color: "gray" }}> <i><BsTrash color='gray' /></i></button>
                         </div>
-                        <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"groom"} adv={isAdvanced} />
-                        <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"bride"} adv={isAdvanced} />
-                        <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"description"} adv={isAdvanced} />
-                        <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"date"} adv={isAdvanced} />
-                        <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"time"} adv={isAdvanced} />
-                        <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"venue"} adv={isAdvanced} />
+                        {["groom", "bride", "description", "date", "time", "venue"].map((item, index) => {
+                            return (<InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={item} adv={isAdvanced} i={index} />);
+                        })}
                         <button
 
                             style={{ color: "white", backgroundColor: "#A663CC" }}
