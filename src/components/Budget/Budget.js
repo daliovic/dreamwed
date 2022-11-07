@@ -5,6 +5,8 @@ import CategoryMain from './CategoryMain';
 import { GiDiamondRing } from 'react-icons/gi';
 import { TbNumber1, TbNumber2, TbHome, TbGift, TbDots } from 'react-icons/tb';
 import {  useParams } from 'react-router-dom';
+import { motion } from "framer-motion/dist/framer-motion"
+
 const icons = [
     {
         name:'Night 1',
@@ -78,12 +80,12 @@ function Budget(props) {
 
 
     return (
-        <div className="row my-3 flex-fill">
+        <motion.div layout className="row my-3 flex-fill">
             <div className="d-flex flex-row col-9 mx-auto justify-content-between">
                 <BudgetSidebar categories={props.categories} expenses={props.expenses}/>
                 <CategoryMain category={props.categories[+(catID)]} icon={icons[+(catID)].icon} expenses={props.expenses} />
             </div>
-        </div>
+        </motion.div>
     );
 }
 

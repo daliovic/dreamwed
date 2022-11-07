@@ -139,6 +139,15 @@ a.active {
   color: white !important;
   background-color: rgb(71, 20, 130) !important
 }
+.main-button {
+  color: white !important;
+  background-color: #A663CC !important
+}
+
+.main-button:hover {
+  color: white !important;
+  background-color: rgb(71, 20, 130) !important
+}
 
 .todo-complete {
   text-decoration: line-through;
@@ -188,7 +197,8 @@ input:-webkit-autofill {
 .react-pdf__Page__canvas {
   margin: 0 auto !important;
   padding: 0 !important;
-  width: 61.018% !important;
+  /* width: 61.018% !important; */
+  width: 390px !important;
   height: 90% !important;
 }
 /* .react-pdf__Page {

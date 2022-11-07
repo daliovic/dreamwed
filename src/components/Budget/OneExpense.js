@@ -37,7 +37,7 @@ const OneExpense = (props) => {
     }, [succGreen]);
     return (
 
-        <motion.li variants={props.variants} className={`${props.classes["expenses-item"]} list-group-item 
+        <motion.li layout variants={props.variants} className={`${props.classes["expenses-item"]} list-group-item 
                     border-0 border-bottom rounded-0 d-flex  ${succGreen} `} onKeyDown={enterKeyHandler}>
             <span className=" my-auto col-4">
                 <div className='expense-group'>

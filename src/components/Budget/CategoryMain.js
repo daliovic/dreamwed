@@ -50,7 +50,7 @@ function CategoryMain(props) {// eslint-disable-next-line
 
 
     return (
-        <div className='d-flex h-100 border border-1 rounded col-8 ml-4 py-2 justify-content-center flex-column'>
+        <motion.div className='d-flex h-100 border border-1 rounded col-8 ml-4 py-2 justify-content-center flex-column'>
             {!props.category && <h2 className='text-center'>Please add a category to get started</h2>}
             {props.category && <>
                 <div className="mt-4 mb-auto mx-auto d-flex flex-column ">
@@ -66,7 +66,7 @@ function CategoryMain(props) {// eslint-disable-next-line
                 <motion.ul variants={variants} initial="hidden" animate="visible" 
 
                     className='list-group mt-3 mb-auto h-100'>
-                    <motion.li variants={variants} className={`${classes["expenses-item"]} list-group-item 
+                    <motion.li layout variants={variants} className={`${classes["expenses-item"]} list-group-item 
                     border-0 border-bottom border-top rounded-0 d-flex`}>
                         <span className=" my-auto col-4">EXPENSE</span>
                         <span className=" my-auto col-3 ms-auto text-end">ESTIMATED COST</span>
@@ -75,7 +75,7 @@ function CategoryMain(props) {// eslint-disable-next-line
                         <span className=" my-auto ms-auto">...</span>
                     </motion.li>
                     {filteredExpenses.map(item => <OneExpense variants={variants} classes={classes} expense={item} key={item.id}></OneExpense>)}
-                    <motion.li variants={variants} className={`${classes["expenses-item"]} ${classes["add"]} list-group-item 
+                    <motion.li layout variants={variants} className={`${classes["expenses-item"]} ${classes["add"]} list-group-item 
                     border-0 border-bottom rounded-0 d-flex`}>
                         <Link onClick={() => {
                             addExpense({
@@ -89,7 +89,7 @@ function CategoryMain(props) {// eslint-disable-next-line
                             })
                         }} className=" my-auto"><FiPlusCircle />{` Add new expense`}</Link>
                     </motion.li>
-                    <motion.li variants={variants}
+                    <motion.li layout variants={variants}
                         className={`${classes["expenses-item"]} list-group-item 
                     border-0 border-top rounded-0 d-flex mt-auto`}>
                         <span className=" my-auto col-4 fw-bolder">Total</span>
@@ -100,7 +100,7 @@ function CategoryMain(props) {// eslint-disable-next-line
                     </motion.li>
 
                 </motion.ul></>}
-        </div>
+        </motion.div>
     );
 }
 

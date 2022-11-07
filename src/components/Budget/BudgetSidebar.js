@@ -20,7 +20,8 @@ function BudgetSidebar(props) {
                             name={cat.name}
                             index={i}
                             cost={cost}
-                            key={i} />)
+                            key={i}
+                            totalCats={props.categories.length} />)
                 })}
             </ul>
         </div>

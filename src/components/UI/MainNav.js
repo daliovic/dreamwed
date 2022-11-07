@@ -15,13 +15,13 @@ const NAV_ICONS = [AiOutlineCalculator, GoChecklist, MdPeopleOutline]
 
 function MainNav(props) {
     return (
-        <div className="row">
+        <motion.div layout className="row">
             <div className="d-flex border-top border-bottom justify-content-center">
                 <ul className='list-group list-group-horizontal'>
                     {NAV_ITEMS.map((item, i) => <MainNavItem text={item.text} link={item.link} key={i} icon={NAV_ICONS[i]} />)}
                 </ul>
             </div>
-        </div>
+        </motion.div>
     );
 }
 

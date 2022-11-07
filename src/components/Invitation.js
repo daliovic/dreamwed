@@ -6,6 +6,7 @@ import { Page, Text, Document, StyleSheet, PDFViewer, View, Image, Font } from '
 import InvitationDetailItem from './InvitationDetailItem';
 import { InvitationCtx } from '../context/InvitationsContext';
 import { Button, Dropdown } from 'react-bootstrap';
+import { BsTrash } from 'react-icons/bs'
 
 Font.register({
     family: "Bargiery",
@@ -63,56 +64,56 @@ function Invitation() {
     const [currentInvitation, setCurrentInvitation] = useState(0)
     const DEFAULT_INVITATION = useMemo(() => (
         {
-        id: -1,
-        bride: {
-            name: "Bride Name",
-            styles: {
-                currentProp: 'Select Property',
-                top: '480px',
-                left: '0px',
-                right: '0px',
+            id: -1,
+            bride: {
+                name: "Bride Name",
+                styles: {
+                    currentProp: 'Select Property',
+                    top: '480px',
+                    left: '0px',
+                    right: '0px',
+                }
+            },
+            groom: {
+                name: "Grooom Name",
+                styles: {
+                    currentProp: 'Select Property',
+                    top: '380px',
+                    left: '0px',
+                    right: '0px',
+                }
+            },
+            date: {
+                name: new Date().toLocaleDateString(),
+                styles: {
+                    currentProp: 'Select Property'
+                }
+            },
+            time: {
+                name: new Date().toLocaleTimeString(),
+                styles: {
+                    currentProp: 'Select Property'
+                }
+            },
+            venue: {
+                name: "Your venue",
+                styles: {
+                    currentProp: 'Select Property'
+                }
+            },
+            description: {
+                name: "would love your presence to celebrate our wedding",
+                styles: {
+                    currentProp: 'Select Property'
+                }
             }
-        },
-        groom: {
-            name: "Grooom Name",
-            styles: {
-                currentProp: 'Select Property',
-                top: '380px',
-                left: '0px',
-                right: '0px',
-            }
-        },
-        date: {
-            name: new Date().toLocaleDateString(),
-            styles: {
-                currentProp: 'Select Property'
-            }
-        },
-        time: {
-            name: new Date().toLocaleTimeString(),
-            styles: {
-                currentProp: 'Select Property'
-            }
-        },
-        venue: {
-            name: "Your venue",
-            styles: {
-                currentProp: 'Select Property'
-            }
-        },
-        description: {
-            name: "would love your presence to celebrate our wedding",
-            styles: {
-                currentProp: 'Select Property'
-            }
-        }
-    } ),[])
+        }), [])
 
     // console.log(invitations[0]);
 
 
     const [invitationDetails, setInvitationDetails] = React.useState({})
-    
+
     useEffect(() => {
         console.log(invitations);
         if (invitations) {
@@ -130,14 +131,12 @@ function Invitation() {
         // })
     }, [invitations, deleteInvitation, currentInvitation, addInvitation, updateInvitation, DEFAULT_INVITATION])
 
-
-
     return (
         <>
             {isLoading ? <p className='text-center'>Loading...</p> :
 
                 <div className="container py-5 d-flex ">
-                    <div className="col mx-auto d-flex" style={{ height: "600px" }}>
+                    <div className="col-5 mx-auto d-flex" style={{ height: "600px" }}>
                         <PDFViewer showToolbar={false} className="react-pdf__Page__canvas" >
                             <Document className="react-pdf__Page">
                                 <Page size="A4" style={styles.body}>
@@ -198,7 +197,7 @@ function Invitation() {
                         </PDFViewer>
                     </div>
 
-                    <div className="col d-flex flex-column">
+                    <div className="col d-flex flex-column ps-3">
                         <div className='d-flex justify-content-between align-items-center'>
                             <h2>Edit content</h2>
                             <div className="form-check">
@@ -206,30 +205,35 @@ function Invitation() {
                                 <label htmlFor="advanced" className='form-check-label' onClick={() => { setIsAdvanced(!isAdvanced) }}>Advanced editing</label>
                             </div>
                         </div>
-                        <Dropdown>
-                            <Dropdown.Toggle id="dropdown-basic"
-                                style={{ backgroundColor: "#FFF", border: "1px solid #ced4da", color: "#777" }} >
-                                {(invitations.findIndex((item) => (item.id === invitationDetails.id)) === -1) ? "New invitation" :
-                                    `${invitations.findIndex((item) => (item.id === invitationDetails.id)) + 1} - ${invitationDetails.groom.name} & ${invitationDetails.bride.name}`}
-                            </Dropdown.Toggle>
+                        <div className='d-flex'>
 
-                            <Dropdown.Menu>
-                                {invitations.map((invitation, index) => {
+                            <Dropdown>
+                                <Dropdown.Toggle id="dropdown-basic"
+                                    style={{ backgroundColor: "#FFF", border: "1px solid #ced4da", color: "#777" }} >
+                                    {(invitations.findIndex((item) => (item.id === invitationDetails.id)) === -1) ? "New invitation" :
+                                        `${invitations.findIndex((item) => (item.id === invitationDetails.id)) + 1} - ${invitationDetails.groom.name} & ${invitationDetails.bride.name}`}
+                                </Dropdown.Toggle>
 
-                                    return (
-                                        <Dropdown.Item key={invitation.id} onClick={() => {
-                                            setInvitationDetails(invitation)
-                                            setCurrentInvitation(index)
-                                        }}>{`${index + 1} - ${invitation.groom.name} & ${invitation.bride.name}`}</Dropdown.Item>
-                                    )
-                                })}
+                                <Dropdown.Menu>
+                                    {invitations.map((invitation, index) => {
 
-                                <Dropdown.Item key={"-1"} onClick={() => {
-                                    setInvitationDetails(DEFAULT_INVITATION)
-                                    setCurrentInvitation(invitations.length -1)
-                                }}>New invitation</Dropdown.Item>
-                            </Dropdown.Menu>
-                        </Dropdown>
+                                        return (
+                                            <Dropdown.Item key={invitation.id} onClick={() => {
+                                                setInvitationDetails(invitation)
+                                                setCurrentInvitation(index)
+                                            }}>{`${index + 1} - ${invitation.groom.name} & ${invitation.bride.name}`}</Dropdown.Item>
+                                        )
+                                    })}
+
+                                    <Dropdown.Item key={"-1"} onClick={() => {
+                                        // addInvitation(DEFAULT_INVITATION)
+                                        //setCurrentInvitation(invitations.length-1)
+                                        setInvitationDetails(DEFAULT_INVITATION)
+                                    }}>New invitation</Dropdown.Item>
+                                </Dropdown.Menu>
+                            </Dropdown>
+                            <button onClick={() => { setCurrentInvitation(0); deleteInvitation(invitations[currentInvitation].id) }} className=" mx-2 btn btn-outline-light" style={{ color: "gray" }}> <i><BsTrash color='gray' /></i></button>
+                        </div>
                         <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"groom"} adv={isAdvanced} />
                         <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"bride"} adv={isAdvanced} />
                         <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"description"} adv={isAdvanced} />
@@ -237,7 +241,7 @@ function Invitation() {
                         <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"time"} adv={isAdvanced} />
                         <InvitationDetailItem invitationDetails={invitationDetails} setInvitationDetails={setInvitationDetails} detailItem={"venue"} adv={isAdvanced} />
                         <button
-                        
+
                             style={{ color: "white", backgroundColor: "#A663CC" }}
                             className="mt-2 btn btn-outline-light"
                             onClick={() => {

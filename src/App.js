@@ -15,6 +15,8 @@ import { CollectionsCtx } from './context/CollectionsContext';
 import { useEffect, useState } from 'react';
 import Todo from './components/Todo/Todo';
 import Invitation from './components/Invitation';
+import Home from './components/Home/Home';
+import Login from './components/Home/Login';
 
 
 function App() {
@@ -47,14 +49,14 @@ function App() {
       <Header />
 
       <MainNav />
-      {user === null && <><h1 className='text-center my-auto'>Please login to continue</h1></>}
+      {user === null && <Login />}
       {user && isLoading && <p className='text-center'>Loading...</p>}
       {/* {console.log(user) } */}
 
       {user && !isLoading &&
         <Routes>
 
-          <Route exact path='/' element={<p>Choose a tool from the navigation bar</p>}></Route>
+          <Route exact path='/' element={<Home />}></Route>
           <Route path='/budget/' element={
             <Budget categories={categories.filter(item => item.uid === user.uid)} expenses={expenses} />
           } />

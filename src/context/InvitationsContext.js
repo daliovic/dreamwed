@@ -32,7 +32,7 @@ export const InvitationContextProvider = ({ children }) => {
         if (user && user.uid) {
             const invitationsRef = collection(db, 'Invitations');
 
-            onSnapshot(query(invitationsRef, where("uid", "==", user.uid)), (snapshot) => {
+            onSnapshot(query(invitationsRef, where("uid", "==", user.uid)),orderBy('createdAt'), (snapshot) => {
                 // onSnapshot(query(invitationsRef, orderBy("createdAt")), (snapshot) => {
                 setInvitations([]);
                 snapshot.docs.forEach(doc => {
