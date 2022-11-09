@@ -1,10 +1,10 @@
 @font-face {
   font-family: 'Bargiery', sans-serif;
-  src: url('http://fonts.cdnfonts.com/css/bargiery')
+  src: url('http://fonts.cdnfonts.com/css/bargiery');
 }
 
 :root {
-  --primary: #A663CC;
+  --primary: #a663cc;
 }
 
 html {
@@ -63,7 +63,7 @@ html {
 }
 
 a.active {
-  color: #A663CC;
+  color: #a663cc;
   border-bottom: solid;
 }
 
@@ -80,7 +80,6 @@ a.active {
 }
 
 .expense-group span:focus {
-
   outline: none !important;
   box-shadow: none;
   border-bottom: 1px solid gray;
@@ -94,7 +93,7 @@ a.active {
 }
 
 .updatedSucc {
-  animation: pulse-bg 1s forwards
+  animation: pulse-bg 1s forwards;
 }
 
 @keyframes pulse {
@@ -111,7 +110,6 @@ a.active {
   }
 }
 
-
 @keyframes pulse-bg {
   0% {
     background-color: #20a80e00;
@@ -127,26 +125,26 @@ a.active {
 }
 
 .add-link {
-  color: #A663CC !important;
+  color: #a663cc !important;
 }
 
 .add-button {
   color: white !important;
-  background-color: #A663CC !important
+  background-color: #a663cc !important;
 }
 
 .add-button:hover {
   color: white !important;
-  background-color: rgb(71, 20, 130) !important
+  background-color: rgb(71, 20, 130) !important;
 }
 .main-button {
   color: white !important;
-  background-color: #A663CC !important
+  background-color: #a663cc !important;
 }
 
 .main-button:hover {
   color: white !important;
-  background-color: rgb(71, 20, 130) !important
+  background-color: rgb(71, 20, 130) !important;
 }
 
 .todo-complete {
@@ -163,7 +161,6 @@ a.active {
   border: 1px solid;
   padding: 10px;
   background-color: #ddd;
-
 }
 
 .animatePosIn {
@@ -197,11 +194,6 @@ input:-webkit-autofill {
 .react-pdf__Page__canvas {
   margin: 0 auto !important;
   padding: 0 !important;
-  /* width: 61.018% !important; */
   width: 390px !important;
   height: 90% !important;
 }
-/* .react-pdf__Page {
-  width: 10% !important;
-  height: 10% !important;
-} */

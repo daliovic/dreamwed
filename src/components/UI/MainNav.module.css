@@ -1,24 +1,24 @@
-.svg-icon{
-    width: 28px;
-    height: 28px;
-    justify-self: center;
+.svg-icon {
+  width: 28px;
+  height: 28px;
+  justify-self: center;
 }
-.nav-list-item{
-    display: grid;
-    grid-template-rows: 31px auto;
-    grid-row-gap: 0.5rem;
-    font-size: 15px;
-    text-align: center;
-    line-height: 1.25rem;
-    text-decoration: none;
-    color: black;
+.nav-list-item {
+  display: grid;
+  grid-template-rows: 31px auto;
+  grid-row-gap: 0.5rem;
+  font-size: 15px;
+  text-align: center;
+  line-height: 1.25rem;
+  text-decoration: none;
+  color: black;
 }
-.nav-list-item:hover span{
-    color:#A663CC;
+.nav-list-item:hover span {
+  color: #a663cc;
 }
-.nav-list-item:hover{
-    color:#A663CC;;
+.nav-list-item:hover {
+  color: #a663cc;
 }
-ul{
-    list-style-type: none;
+ul {
+  list-style-type: none;
 }

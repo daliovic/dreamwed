@@ -1,20 +1,18 @@
 .bar {
-    height: 20px;
-    width: 50%;
-    background: linear-gradient(90deg, rgba(111, 45, 189, 1) 0%, rgba(178, 152, 220, 1) 100%);
-    border-radius: 20px;
+  height: 20px;
+  width: 50%;
+  background: linear-gradient(90deg, rgba(111, 45, 189, 1) 0%, rgba(178, 152, 220, 1) 100%);
+  border-radius: 20px;
 }
 
 .expenses-item {
-    min-height: 55px;
-    /* font-size: 0.9rem; */
+  min-height: 55px;
 }
-.expenses-item:first-child{
-    color:#8c8c8c;
+.expenses-item:first-child {
+  color: #8c8c8c;
 }
 
-.add{
-    color :rgba(111, 45, 189, 1);
-    font-weight: bold;
-    
+.add {
+  color: rgba(111, 45, 189, 1);
+  font-weight: bold;
 }
