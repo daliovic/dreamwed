@@ -1,5 +1,6 @@
 import './App.css'
 import 'bootstrap/dist/css/bootstrap.min.css'
+import 'react-toastify/dist/ReactToastify.css'
 
 import Header from './components/UI/Header'
 import MainNav from './components/UI/MainNav'
@@ -14,6 +15,7 @@ import Todo from './components/Todo/Todo'
 import Home from './components/Home/Home'
 import Login from './components/Home/Login'
 import Invitation from './components/Invitation/Invitation'
+import { Slide, toast } from 'react-toastify'
 
 function App() {
   const { user } = UserAuth()
@@ -21,13 +23,25 @@ function App() {
   const { categories, expenses } = CollectionsCtx()
 
   const [isLoading, setIsLoading] = useState(true)
+  const notifyLoginError = () =>
+    toast.error('Please login to continue', {
+      position: 'top-center',
+      autoClose: 3000,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: true,
+      draggable: true,
+      transition: Slide,
+      theme: 'colored',
+    })
 
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
     if (location.pathname !== '/' && !user) {
       navigate('/')
-      
+      notifyLoginError()
+      toast.clearWaitingQueue()
     }
     if (categories !== null && expenses !== null) {
       if (categories.length > 0 && expenses.length > 0) {

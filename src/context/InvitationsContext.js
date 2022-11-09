@@ -13,6 +13,7 @@ import {
   where,
 } from 'firebase/firestore'
 import { UserAuth } from './AuthContext'
+import { Slide, toast } from 'react-toastify'
 
 const db = getFirestore()
 
@@ -24,14 +25,47 @@ export const InvitationContextProvider = ({ children }) => {
   const invitationsRef = collection(db, 'Invitations')
 
   const addInvitation = (value) => {
-    addDoc(invitationsRef, { ...value, uid: user.uid })
+    addDoc(invitationsRef, { ...value, uid: user.uid }).then(() => {
+      toast.success('Invitation added successfully', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Slide,
+        theme: 'light',
+      })
+    })
   }
 
   const updateInvitation = (id, value) => {
-    updateDoc(doc(invitationsRef, id), value)
+    updateDoc(doc(invitationsRef, id), value).then(() => {
+      toast.success('Invitation updated successfully', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Slide,
+        theme: 'light',
+      })
+    })
   }
   const deleteInvitation = (id) => {
-    deleteDoc(doc(invitationsRef, id))
+    deleteDoc(doc(invitationsRef, id)).then(() => {
+      toast.error('Invitation deleted successfully', {
+        position: 'top-center',
+        autoClose: 3000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        transition: Slide,
+        theme: 'light',
+      })
+    })
   }
 
   useEffect(() => {

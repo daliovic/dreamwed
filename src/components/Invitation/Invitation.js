@@ -112,7 +112,6 @@ function Invitation() {
   const [invitationDetails, setInvitationDetails] = React.useState({})
 
   useEffect(() => {
-    console.log(invitations)
     if (invitations) {
       if (invitations.length === 0) {
         setInvitationDetails(DEFAULT_INVITATION)

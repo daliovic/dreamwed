@@ -8,15 +8,16 @@ import { CollectionsContextProvider } from './context/CollectionsContext'
 import { BrowserRouter } from 'react-router-dom'
 import { TodoContextProvider } from './context/TodoContext'
 import { InvitationContextProvider } from './context/InvitationsContext'
+import { ToastContainer } from 'react-toastify'
 
 const root = ReactDOM.createRoot(document.getElementById('root'))
-const providers = 
 root.render(
   <AuthContextProvider>
     <TodoContextProvider>
       <CollectionsContextProvider>
         <InvitationContextProvider>
           <BrowserRouter>
+            <ToastContainer limit={1} />
             <App />
           </BrowserRouter>
         </InvitationContextProvider>
