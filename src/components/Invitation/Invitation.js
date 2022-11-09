@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useMemo } from 'react'
-import invitation from '../../src/assets/Invitation.png'
-import myFont from '../../src/assets/Bargiery.woff'
-import myFont2 from '../../src/assets/betterside.woff'
+import invitation from '../../../src/assets/Invitation.png'
+import myFont from '../../../src/assets/Bargiery.woff'
+import myFont2 from '../../../src/assets/betterside.woff'
 import { Page, Text, Document, StyleSheet, PDFViewer, View, Image, Font } from '@react-pdf/renderer'
 import InvitationDetailItem from './InvitationDetailItem'
 import { InvitationCtx } from '../../context/InvitationsContext'
@@ -285,6 +285,7 @@ function Invitation() {
                   detailItem={item}
                   adv={isAdvanced}
                   i={index}
+                  key={index}
                 />
               )
             })}

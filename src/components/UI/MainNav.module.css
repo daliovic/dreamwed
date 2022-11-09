@@ -14,10 +14,10 @@
   color: black;
 }
 .nav-list-item:hover span {
-  color: #a663cc;
+  color: #a663cc!important;
 }
 .nav-list-item:hover {
-  color: #a663cc;
+  color: #a663cc!important;
 }
 ul {
   list-style-type: none;

@@ -64,7 +64,11 @@ html {
 
 a.active {
   color: #a663cc;
-  border-bottom: solid;
+  border-bottom: solid 3px #a663cc;
+}
+a {
+  text-decoration: none!important;
+  color: inherit!important;
 }
 
 .expense-group input:focus {

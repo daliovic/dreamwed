@@ -11,9 +11,9 @@ import { UserAuth } from './context/AuthContext'
 import { CollectionsCtx } from './context/CollectionsContext'
 import { useEffect, useState } from 'react'
 import Todo from './components/Todo/Todo'
-import Invitation from './components/Invitation'
 import Home from './components/Home/Home'
 import Login from './components/Home/Login'
+import Invitation from './components/Invitation/Invitation'
 
 function App() {
   const { user } = UserAuth()
@@ -25,9 +25,9 @@ function App() {
   const navigate = useNavigate()
   const location = useLocation()
   useEffect(() => {
-    console.log(location.pathname)
     if (location.pathname !== '/' && !user) {
       navigate('/')
+      
     }
     if (categories !== null && expenses !== null) {
       if (categories.length > 0 && expenses.length > 0) {
